@@ -84,20 +84,20 @@ class AttendanceClockOutView(APIView):
 # 4. Leaves
 class LeaveRequestListCreateView(APIView):
     def get(self, request):
-        res = supabase.table("leaves").select("*").execute()
+        res = supabase.table("leave_requests").select("*").execute()
         return Response(res.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        res = supabase.table("leaves").insert(request.data).execute()
+        res = supabase.table("leave_requests").insert(request.data).execute()
         return Response(res.data, status=status.HTTP_201_CREATED)
 
 class LeaveRequestDetailView(APIView):
     def get(self, request, pk):
-        res = supabase.table("leaves").select("*").eq("id", str(pk)).execute()
+        res = supabase.table("leave_requests").select("*").eq("id", str(pk)).execute()
         return Response(res.data[0] if res.data else {}, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
-        res = supabase.table("leaves").update(request.data).eq("id", str(pk)).execute()
+        res = supabase.table("leave_requests").update(request.data).eq("id", str(pk)).execute()
         return Response(res.data, status=status.HTTP_200_OK)
 
 
@@ -152,21 +152,21 @@ class PayrollItemDetailView(APIView):
 # 8. Performance Reviews
 class PerformanceReviewListCreateView(APIView):
     def get(self, request):
-        res = supabase.table("performance_reviews").select("*").execute()
+        res = supabase.table("core_performancereview").select("*").execute()
         return Response(res.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        res = supabase.table("performance_reviews").insert(request.data).execute()
+        res = supabase.table("core_performancereview").insert(request.data).execute()
         return Response(res.data, status=status.HTTP_201_CREATED)
 
 class PerformanceReviewDetailView(APIView):
     def get(self, request, pk):
-        res = supabase.table("performance_reviews").select("*").eq("id", str(pk)).execute()
+        res = supabase.table("core_performancereview").select("*").eq("id", str(pk)).execute()
         return Response(res.data[0] if res.data else {}, status=status.HTTP_200_OK)
 
 
 # 9. Audit Logs
 class EmployeeAuditLogListView(APIView):
     def get(self, request):
-        res = supabase.table("audit_logs").select("*").execute()
+        res = supabase.table("employee_audit_logs").select("*").execute()
         return Response(res.data, status=status.HTTP_200_OK)
