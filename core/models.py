@@ -41,10 +41,13 @@ class LeaveRequest(models.Model):
 
 class ShiftRoster(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    shift_date = models.DateField()
+    name = models.CharField(max_length=255)
+    shift_type = models.CharField(max_length=50)
     start_time = models.TimeField()
     end_time = models.TimeField()
+    break_mins = models.IntegerField(default=0)
+    created_at = models.DateTimeField()
+    updated_at = models.DateTimeField()
 
 class PayrollRun(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
